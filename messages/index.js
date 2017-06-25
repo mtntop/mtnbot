@@ -17,7 +17,11 @@ var bot = new builder.UniversalBot(connector);
 bot.localePath(path.join(__dirname, './locale'));
 
 bot.dialog('/', function (session) {
-    request.post('https://themtn.top/api', function (error, response, body) {
+    var requestObj = {
+        url: 'https://themtn.top/api',
+        json: true
+    }
+    request.get(requestObj, function (error, response, body) {
         session.send('The mountain is ' + (body.result ? 'out! ':'not out. ') + body.image);
     });
 });
